@@ -19,6 +19,8 @@ Route::get('/', function () {
     return view('pages.welcome');
 });
 
+Route::get('/register', [LoginController::class, 'register']);
+Route::post('/register', [LoginController::class, 'store']);
 Route::get('/login', [LoginController::class, 'index']);
 Route::post('/login', [LoginController::class, 'login']);
 
