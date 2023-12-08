@@ -1,4 +1,5 @@
 @extends('app')
+@dd($request)
 
 @section('content')
     <h2 class="text-center">Article</h2>

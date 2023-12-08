@@ -15,13 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.welcome');
-});
+Route::get('/', fn() => view('pages.welcome'));
 
-Route::get('/register', [LoginController::class, 'register']);
+Route::get('/account', fn() => view('pages.account'))->middleware('auth');
+
+Route::get('/register', [LoginController::class, 'register'])->middleware('guest');
 Route::post('/register', [LoginController::class, 'store']);
-Route::get('/login', [LoginController::class, 'index']);
+
+Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->name('login');
 Route::post('/login', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
 Route::resource('/content', ContentController::class);
