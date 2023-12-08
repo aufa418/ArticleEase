@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->string('title');
             $table->string('banner');
             $table->string('author');
+            $table->string('author_id');
             $table->text('body');
             $table->timestamps();
         });

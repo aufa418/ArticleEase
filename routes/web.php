@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\LoginController;
+use App\Models\Article;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,3 +29,5 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
 Route::resource('/content', ContentController::class);
+
+Route::get('/mycontent', fn() => view('pages.myContent', ['datas' => Article::where('author_id', Auth::user()->id)->latest()->get()]));

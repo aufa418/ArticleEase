@@ -1,9 +1,13 @@
+@php
+    use Illuminate\Support\Str;
+@endphp
+
 <div class="card" style="width: 18rem;">
-    <img src="..." class="card-img-top">
+    <img src="storage/{{ $data->banner }}" class="card-img-top">
     <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-            content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <h5 class="card-title">{{ $data->title }}</h5>
+        <h6 class="card-subtitle mb-3 text-body-secondary">Author {{ $data->author }}</h6>
+        <p class="card-text">{{ Str::limit(strip_tags($data->body), 100) }}</p>
+        <a href="{{ route('content.show', $data->id) }}" class="btn btn-primary">Go somewhere</a>
     </div>
 </div>

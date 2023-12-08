@@ -40,7 +40,6 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
 
-        // $validate['password'] = Hash::make($validate['password']);
         $validate['password'] = bcrypt($validate['password']);
 
         User::create($validate);

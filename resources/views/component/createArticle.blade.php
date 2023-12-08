@@ -1,10 +1,11 @@
-<div class="card" style="width: 80%;">
+<div class="card" style="width: 70%;">
     <div class="card-body">
         <h4 class="card-title text-center">Create New Post</h4>
         <br>
         <form action="{{ route('content.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="author" value="{{ Auth::user()->name }}">
+            <input type="hidden" name="author_id" value="{{ Auth::user()->id }}">
 
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>

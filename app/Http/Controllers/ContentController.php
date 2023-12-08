@@ -13,7 +13,7 @@ class ContentController extends Controller
     public function index()
     {
         return view('pages.content', [
-            'post' => Article::orderBy('created_at', 'DESC')->get()
+            'datas' => Article::orderBy('created_at', 'DESC')->get()
         ]);
     }
 
@@ -22,17 +22,21 @@ class ContentController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
         $validate = $request->validate([
             'title' => 'required',
             'author' => 'required',
-            'banner' => 'required',
+            'author_id' => 'required',
+            'banner' => 'required|image|file|max:1024',
             'body' => 'required',
         ]);
 
+        if ($request->file('banner')) {
+            $validate['banner'] = $request->file('banner')->store('post-img');
+        }
+
         Article::create($validate);
 
-        return redirect(route('content.index'));
+        return redirect('/mycontent');
     }
 
     /**
@@ -40,7 +44,7 @@ class ContentController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('pages.showContent', ['data' => Article::find($id)->get()]);
     }
 
     /**

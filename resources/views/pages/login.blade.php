@@ -1,9 +1,13 @@
 @extends('app')
 
 @section('content')
+    <br>
     @if (Session()->has('LoginError'))
-        <div class="alert alert-success" role="alert">
-            {{ session('loginError') }}
+        <div class="alert alert-danger d-flex align-items-center" role="alert">
+            <i data-feather="alert-triangle"></i>
+            <div>
+                {{ session('LoginError') }}
+            </div>
         </div>
     @endif
     <div class="card mx-auto" style="width: 50%;">
