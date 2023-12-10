@@ -4,18 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ContentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        return view('pages.content', [
-            'datas' => Article::orderBy('created_at', 'DESC')->get()
-        ]);
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -40,19 +36,11 @@ class ContentController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        return view('pages.showContent', ['data' => Article::find($id)->get()]);
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        //
+        return view('pages.editContent', ['data' => Article::find($id)->first()]);
     }
 
     /**
@@ -60,14 +48,37 @@ class ContentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // dd($request);
+        $validate = $request->validate([
+            'title' => 'string',
+            'author' => 'required',
+            'author_id' => 'required',
+            'banner' => 'image|file|max:1024',
+            'body' => 'string',
+        ]);
+
+        if ($request->banner) {
+            Storage::delete($request->imageOld);
+            $validate['banner'] = $request->file('banner')->store('post-img');
+        } else {
+            $validate['banner'] = $request->imageOld;
+        }
+
+        Article::where('id', $id)->update($validate);
+
+        return redirect('/mycontent');
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id, Request $request)
     {
-        //
+        // dd($request);
+        Storage::delete($request->imageOld);
+        Article::find($id)->delete();
+        return redirect('/mycontent');
     }
+
 }
