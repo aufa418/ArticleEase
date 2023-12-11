@@ -16,8 +16,11 @@ return new class extends Migration {
             $table->string('banner');
             $table->string('author');
             $table->string('author_id');
+            $table->unsignedBigInteger('category_id');
             $table->text('body');
             $table->timestamps();
+
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 

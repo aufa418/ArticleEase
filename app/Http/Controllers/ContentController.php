@@ -22,6 +22,7 @@ class ContentController extends Controller
             'title' => 'required',
             'author' => 'required',
             'author_id' => 'required',
+            'category_id' => 'required',
             'banner' => 'required|image|file|max:1024',
             'body' => 'required',
         ]);

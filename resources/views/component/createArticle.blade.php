@@ -13,6 +13,15 @@
             </div>
 
             <div class="mb-3">
+                <label for="category" class="form-label">Category</label>
+                <select class="form-select" id="category" name="category_id">
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="mb-3">
                 <label for="formFile" class="form-label">Banner</label>
                 <input class="form-control" type="file" id="formFile" name="banner">
             </div>

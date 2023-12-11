@@ -3,6 +3,7 @@
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\LoginController;
 use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -32,4 +33,4 @@ Route::resource('/content', ContentController::class)->middleware('auth')->excep
 Route::get('/content', fn() => view('pages.content', ['datas' => Article::orderBy('created_at', 'DESC')->get()]));
 Route::get('/content/{id}', fn($id) => view('pages.showContent', ['data' => Article::where('id', $id)->first()]));
 
-Route::get('/mycontent', fn() => view('pages.myContent', ['datas' => Article::where('author_id', Auth::user()->id)->latest()->get()]));
+Route::get('/mycontent', fn() => view('pages.myContent', ['datas' => Article::where('author_id', Auth::user()->id)->latest()->get(), 'categories' => Category::all()]));
