@@ -9,12 +9,12 @@
 
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control" id="title" name="title">
+                <input type="text" class="form-control" id="title" name="title" required>
             </div>
 
             <div class="mb-3">
                 <label for="category" class="form-label">Category</label>
-                <select class="form-select" id="category" name="category_id">
+                <select class="form-select" id="category" name="category_id" required>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
@@ -23,12 +23,12 @@
 
             <div class="mb-3">
                 <label for="formFile" class="form-label">Banner</label>
-                <input class="form-control" type="file" id="formFile" name="banner">
+                <input class="form-control" type="file" id="formFile" name="banner" required>
             </div>
 
             <div class="mb-3">
                 <label>Content</label>
-                <input id="x" type="hidden" name="body">
+                <input id="x" type="hidden" name="body" required>
                 <trix-editor input="x"></trix-editor>
             </div>
 

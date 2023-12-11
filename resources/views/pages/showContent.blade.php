@@ -7,7 +7,7 @@
     <div class="card">
         <div class="card-body">
             <h2 class="text-center card-title">{{ $data->title }}</h2>
-            <p>Category {{ $data->category->name }}</p>
+            <h6 class="text-center card-subtitle text-secondary">Category {{ $data->category->name }}</h6>
             <hr>
             <br>
             <img src="{{ asset('storage/' . $data->banner) }}" style="max-width: 70%;" class="mx-auto mb-5 d-block">

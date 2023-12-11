@@ -7,6 +7,7 @@
                 <tr>
                     <th scope="col" class="text-center">ID</th>
                     <th scope="col">Title</th>
+                    <th scope="col">Category</th>
                     <th scope="col">Update At</th>
                     <th scope="col" class="text-center">Action</th>
                 </tr>
@@ -16,6 +17,7 @@
                     <tr>
                         <th scope="row" class="text-center">{{ $loop->iteration }}</th>
                         <td>{{ $data->title }}</td>
+                        <td>{{ $data->category->name }}</td>
                         <td>{{ $data->updated_at }}</td>
                         <td class="text-center">
                             <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
